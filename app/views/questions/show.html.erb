@@ -1,0 +1,37 @@
+
+<p><%= @question.body %></p>
+<p>By <%= @question.user.email %></p>
+
+<p>
+  <%= link_to 'Edit', edit_question_path(@question) %> |
+  <%= link_to 'Back', questions_path %>
+</p>
+
+<h3>Answers</h3>
+
+<% @question.answers.each do |answer| %>
+  <blockquote>
+    <p><%= answer.body %></p>
+    <p><i>By <%= answer.user.email %></i></p>
+    <p>Score: <%= answer.score %></p>
+    <% if user_signed_in? %>
+      <%= button_to 'Vote Up', vote_up_path(answer) %>
+      <%= button_to 'Vote Down', vote_down_path(answer) %>
+    <% end %>
+  </blockquote>
+  <br />
+<% end %>
+
+<% if user_signed_in? %>
+  <h3>Add Your Answer</h3>
+  <%= form_for([@question, @question.answers.build]) do |f| %>
+    <div class="field">
+      <%= f.label :body %><br />
+      <%= f.text_area :body %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %> 
+<% end %>
+

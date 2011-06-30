@@ -1,0 +1,16 @@
+
+<% @questions.each do |question| %>
+  <p><%= question.body %></p>
+  <p><i>By <%= question.user.email %></i></p>
+  <p><%= pluralize question.answers.count, 'answer' %></p>
+
+  <p>
+    <%= link_to 'Show', question %> |
+    <%= link_to 'Edit', edit_question_path(question) %> |
+    <%= link_to 'Destroy', question, :confirm => 'Are you sure?', :method => :delete %>
+  </p>
+
+  <br />
+<% end %>
+
+<%= link_to 'New Question', new_question_path %>
