@@ -14,7 +14,7 @@
     <p><%= answer.body %></p>
     <p><i>By <%= answer.user.email %></i></p>
     <p>Score: <%= answer.score %></p>
-    <% if user_signed_in? %>
+    <% if can? :create, Vote %>
       <%= button_to 'Vote Up', vote_up_path(answer) %>
       <%= button_to 'Vote Down', vote_down_path(answer) %>
     <% end %>
@@ -22,7 +22,7 @@
   <br />
 <% end %>
 
-<% if user_signed_in? %>
+<% if can? :create, Answer %>
   <h3>Add Your Answer</h3>
   <%= form_for([@question, @question.answers.build]) do |f| %>
     <div class="field">

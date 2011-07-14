@@ -5,7 +5,13 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, 
+    :password_confirmation, :remember_me,
+    :username, :role, :photo
+
+  ROLES = ['admin', 'moderator', 'user']
+
+  has_attached_file :photo
 
   has_many :questions
   has_many :answers
@@ -14,3 +20,4 @@ class User < ActiveRecord::Base
   has_many :answered_questions, :through => :answers, :source => :question
   has_many :voted_answers, :through => :votes, :source => :answer
 end
+
