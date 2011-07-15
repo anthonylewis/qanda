@@ -5,7 +5,7 @@ class QuestionsController < ApplicationController
   # GET /questions.xml
   def index
     @search = Question.search params[:search]
-    @questions = @search.paginate :page => params[:page], :per_page => 5
+    @questions = @search.paginate :include => [:answers, :user], :page => params[:page], :per_page => 5
 
     respond_to do |format|
       format.html # index.html.erb
