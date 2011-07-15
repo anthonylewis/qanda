@@ -14,10 +14,11 @@ set :branch, 'master'
 set :scm_verbose, true
 set :use_sudo, false
 
-role :web, "50.56.107.232"                     # Your HTTP server, Apache/etc
-role :app, "50.56.107.232"                     # This may be the same as your `Web` server
-role :db,  "50.56.107.232", :primary => true   # This is where Rails migrations will run
+role :web, "50.56.107.232"
+role :app, "50.56.107.232"
+role :db,  "50.56.107.232", :primary => true
 
+# this makes RVM work even when deploying from Windows
 set :default_environment, {
   'PATH' => "/home/tony/.rvm/gems/ruby-1.9.2-p180@railsclass/bin:/home/tony/.rvm/gems/ruby-1.9.2-p180@global/bin:/home/tony/.rvm/rubies/ruby-1.9.2-p180/bin:/home/tony/.rvm/bin:$PATH",
   'RUBY_VERSION' => 'ruby-1.9.2-p180',
@@ -25,7 +26,6 @@ set :default_environment, {
   'GEM_PATH' => '/home/tony/.rvm/gems/ruby-1.9.2-p180@railsclass:/home/tony/.rvm/gems/ruby-1.9.2-p180@global',
 }
 
-# If you are using Passenger mod_rails uncomment this:
 namespace :deploy do
   task :start do ; end
   task :stop do ; end
@@ -34,6 +34,7 @@ namespace :deploy do
   end
 end
 
+# automatically trust .rvmrc
 namespace :rvm do
   desc 'Trust rvmrc file'
   task :trust_rvmrc do
